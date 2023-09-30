@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { useSelector } from 'react-redux'
+import DarkModeSwitcher from './components/dark-mode-switcher/dark-mode-switcher'
+import './App.css'
+import LangSwitcher from './components/lang-switcher/lang-switcher'
+import { $t } from './helpers/locale-helper'
 
-function App() {
+
+const App = () => {
+  const darkMode = useSelector(state=>state.theme.darkMode)
+  //useSelector used to update App.js to be able to render lang-switcher
+  const currentLang = useSelector(state=>state.locale.lang)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    
+    <div className= {darkMode ? 'dark' : ""}>
+      <DarkModeSwitcher/>
+      <LangSwitcher/>
+      <h2>{$t("hello-world")}</h2>
     </div>
-  );
+    
+  )
 }
 
-export default App;
+export default App
